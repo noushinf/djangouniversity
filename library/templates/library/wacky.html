@@ -1,0 +1,14 @@
+<h1>List of {{ crazy_thing }}s</h1>
+<p>
+{% if authors_list %}
+<ul>
+  {% for author in author_list %}
+    <li>
+      <a href="{% url 'library:author_Update' authors.id %}">{{ authors.name }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% else %}
+  <p>There are no {{ crazy_thing }}s in the database.</p>
+{% endif %}
+</p>

@@ -1,0 +1,75 @@
+{% extends "base_bootstrap.html" %}
+{% load crispy_forms_tags %}
+{% load humanize %} <!-- https://docs.djangoproject.com/en/3.0/ref/contrib/humanize -->
+{% block head %}
+
+<style>
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: none;
+  background-color: rgba(0,0,0,0.5); /*dim the background*/
+}
+</style>
+{% endblock %}
+{% block content %}
+{% if book.content_type %}
+<div id="overlay" class="overlay" style="text-align: center;"
+   onclick="document.getElementById('overlay').style.display = 'none';" >
+<img style="width:90%;margin-top: 50px; border:3px solid black;" src="{% url 'library:book_picture' book.id %}">
+</div>
+{% endif %}
+<span style="float: right;">
+({{ book.name}})
+
+<a href="{% url 'library:book_update' book.id %}"> Update<i class="fa fa-pencil"></i></a>
+<a href="{% url 'library:book_delete' book.id %}">Delete<i class="fa fa-trash"></i></a>
+
+</span>
+<h1>{{ book.name }}</h1>
+{% if book.content_type %}
+<img style="float:right; max-width:50%;" src="{% url 'library:book_picture' book.id %}"
+    onclick="document.getElementById('overlay').style.display = 'block';">
+{% endif %}
+<p>
+{{ book.description }}
+</p>
+<p>
+{{ book.comments }}
+</p>
+{% for comment in comments %}
+<p>
+    {{ comment.text }}
+</p>
+ {% endfor %}
+<p>
+({{ book.updated_at|naturaltime }})
+</p>
+{% if user.is_authenticated %}
+
+<p>
+{% load crispy_forms_tags %}
+<form method="post" action="{% url 'library:book_comment_create' book.id %}">
+    {% csrf_token %}
+    {{ comment_form|crispy }}
+    <input type="text" name="comment" size="50"/>
+
+<input type="submit" value="Submit">
+<input type="submit" value="All books" onclick="window.location.href='{% url 'library:all' %}';return false;">
+</form>
+
+{% endif %}
+{% for comment in comments %}
+<p> {{ comment.text }}
+({{ comment.updated_at|naturaltime }})
+{% if user == comment.owner %}
+<a href="{% url 'library:book_comment_delete' comment.id %}"><i class="fa fa-trash"></i></a>
+{% endif %}
+</p>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
+  <h1>category List</h1>
+  {% if category_list %}
+  <ul>
+    {% for category in category_list %}
+      <li>
+          {{ category.name }}
+         (<a href="{% url 'library:category_Update' category.id %}">Update</a> |
+          <a href="{% url 'library:category_Delete' category.id %}">Delete</a>)
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no category in the library.</p>
+  {% endif %}
+  <p><a href="{% url 'library:category_create' %}">Add a category</a></p>
+  <p>
+    <a href="{% url 'library:all' %}">Back to books</a>
+  </p>
+{% endblock %}

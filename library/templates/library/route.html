@@ -1,0 +1,27 @@
+<h2>Using the url tag</h2>
+<ul>
+    <li>
+        <a href="library/second">
+        hard-coded</a> (not DRY)
+    </li>
+    <li>
+        {% url 'library:first-view' %}
+        (url 'library:first-view')
+    </li>
+    <li>
+        <a href="{% url 'library:second-view' %}">
+        url 'library:second-view'</a>
+    </li>
+    <li>
+        {% url 'library:books' %}
+        (url 'library:books') from library/urls.py
+    </li>
+
+    <li>
+        {% url 'library:second-view' %}
+        (url 'library:second-view')
+    </li>
+</ul>
+<p>
+<a href="https://docs.djangoproject.com/en/3.0/ref/templates/builtins/#url" target="_blank">Documentation</a>
+</p>

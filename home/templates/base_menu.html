@@ -1,0 +1,62 @@
+
+{% extends "base_bootstrap.html" %}
+
+{% block navbar %}
+
+<nav class="navbar navbar-default navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="/">{{ settings.APP_NAME }}</a>
+    </div>
+
+    <ul class="nav navbar-nav">
+        {% url 'librarysss' as library %}
+        <li {% if request.get_full_path == library %}class="active"{% endif %}>
+            <a href="{% url 'library:all' %}">Books</a></li>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="{% url 'library:books' %}">Grid view</a>
+            </li>
+
+            <li>
+                <a href="{% url 'library:book_create' %}">Create Book</a>
+            </li>
+             <li>
+                <a href="{% url 'library:author_create' %}">Create Author</a>
+            </li>
+             <li>
+                <a href="{% url 'library:talk' %}">Chat</a>
+            </li>
+
+             <li>
+                <a href="{% url 'library:messages' %}">Message</a>
+            </li>
+
+            <li>
+                <a href="{% url 'library:language_create' %}">Create Language</a>
+            </li>
+             <li>
+                <a href="{% url 'library:place_create' %}">Create Place</a>
+            </li>
+             <li>
+                <a href="{% url 'library:category_create' %}">Create Category</a>
+            </li>
+
+
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+
+                </a>
+                <ul class="dropdown-menu">
+                    <li>{% url 'library:all' %}>Logout</li>
+                </ul>
+            </li>
+
+
+
+        </ul>
+    </ul>
+  </div>>
+</nav>
+{% endblock %}

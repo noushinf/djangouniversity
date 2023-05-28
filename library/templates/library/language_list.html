@@ -1,0 +1,21 @@
+{% extends "base_menu.html" %}
+{% block content %}
+  <h1>Language List</h1>
+  {% if language_list %}
+  <ul>
+    {% for languege in language_list %}
+      <li>
+          {{ languege.language }}
+         (<a href="{% url 'library:language_Update' languege.id %}">Update</a> |
+          <a href="{% url 'library:language_Delete' languege.id %}">Delete</a>)
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no language in the library.</p>
+  {% endif %}
+  <p><a href="{% url 'library:language_create' %}">Add a language</a></p>
+  <p>
+    <a href="{% url 'library:all' %}">Back to books</a>
+  </p>
+{% endblock %}

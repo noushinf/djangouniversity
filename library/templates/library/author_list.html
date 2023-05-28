@@ -1,0 +1,22 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
+  <h1>Author List</h1>
+  {% if author_list %}
+  <ul>
+    {% for author in author_list %}
+      <li>
+          {{ author.name }}
+         (<a href="{% url 'library:author_Update' author.id %}">Update</a> |
+          <a href="{% url 'library:author_Delete' author.id %}">Delete</a>)
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no author in the library.</p>
+  {% endif %}
+  <p><a href="{% url 'library:author_create' %}">Add a author</a></p>
+  <p>
+    <a href="{% url 'library:all' %}">Back to books</a>
+  </p>
+{% endblock %}

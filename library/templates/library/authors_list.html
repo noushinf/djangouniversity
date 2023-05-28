@@ -1,0 +1,14 @@
+<h1>Authors List</h1>
+<p>
+{% if author_list %}
+<ul>
+  {% for author in author_list %}
+    <li>
+      <a href="{% url 'library:author_Update' author.id %}">{{ author.name }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% else %}
+  <p>There are no authors in the database.</p>
+{% endif %}
+</p>

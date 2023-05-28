@@ -1,0 +1,22 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
+  <h1>Place List</h1>
+  {% if place_list %}
+  <ul>
+    {% for place in place_list %}
+      <li>
+          {{ place.section }}
+         (<a href="{% url 'library:place_Update' place.id %}">Update</a> |
+          <a href="{% url 'library:place_Delete' place.id %}">Delete</a>)
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no place in the library.</p>
+  {% endif %}
+  <p><a href="{% url 'library:place_create' %}">Add a place</a></p>
+  <p>
+    <a href="{% url 'library:all' %}">Back to books</a>
+  </p>
+{% endblock %}
